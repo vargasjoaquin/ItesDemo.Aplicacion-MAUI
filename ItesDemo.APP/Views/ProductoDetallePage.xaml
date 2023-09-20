@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ItesDemo.APP.Views.ProductoDetallePage"
+             Title="Detalle del producto">
+
+    <ContentPage.Content>
+        <ScrollView BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+            <VerticalStackLayout>
+                <Grid ColumnDefinitions="*,Auto,*" RowDefinitions="160, Auto">
+                    <BoxView
+                        Grid.ColumnSpan="3"
+                        BackgroundColor="{StaticResource Primary}"
+                        HeightRequest="160"
+                        HorizontalOptions="FillAndExpand" />
+                    <Frame
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Margin="0,80,0,0"
+                        HeightRequest="160"
+                        WidthRequest="160"
+                        HorizontalOptions="Center" 
+                        Padding="0"
+                        IsClippedToBounds="True"
+                        CornerRadius="80">
+                        <Image
+                            Aspect="AspectFill"
+                            HeightRequest="160"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Source="{Binding ProductoModel.urlImagen}"
+                            WidthRequest="160"/>
+                    </Frame>
+                </Grid>
+                <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Padding="10" Spacing="25">
+                    <Label Text="{Binding ProductoModel.nombre}" FontSize="Medium" />
+                </VerticalStackLayout>
+                <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Padding="40" Spacing="25">
+                <Label Text="{Binding ProductoModel.tipo, StringFormat='Tipo de producto: {0}'}" />
+            <Label Text="{Binding ProductoModel.descripcion, StringFormat='Descripcion del producto: {0}'}" />
+            <Label Text="{Binding ProductoModel.precio, StringFormat='Precio: {0:C}'}" />
+             <Label Text="{Binding ProductoModel.stock, StringFormat='Stock: {0} unidades'}" />
+                </VerticalStackLayout>
+                
+            </VerticalStackLayout>
+            
+        </ScrollView>
+        
+    </ContentPage.Content>
+    
+</ContentPage>

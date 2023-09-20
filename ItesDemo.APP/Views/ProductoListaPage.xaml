@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ItesDemo.APP.Views.ProductoListaPage"
+             xmlns:vm="clr-namespace:ItesDemo.APP.ViewModels"                
+             Title="Listado de productos">
+    <ContentPage.BindingContext>
+        <vm:ProductoListaViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid Margin="5"           
+          RowSpacing="0"
+          RowDefinitions="Auto, *, Auto">
+
+        <StackLayout Grid.Row="0" Orientation="Horizontal" Spacing="10">
+            <Entry Placeholder="Buscar por nombre" Text="{Binding SearchText}" HorizontalOptions="FillAndExpand" /> <!--ACA ESTA EL BUSCADOR DE PRODUCTOSsss-->
+            <Picker Title="Filtrar por Tipo" 
+                    SelectedItem="{Binding SelectedTipo, Mode=TwoWay}"> <!--ACA ESTA EL FILTRADO DE PRODUCTOS-->
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String></x:String>
+                        <x:String>Gaseosa</x:String>
+                        <x:String>Snack</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </StackLayout>
+
+        <RefreshView Grid.Row="1" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView
+                ItemsSource="{Binding Productos}"
+                SelectionMode="Single" 
+                SelectedItem="{Binding ProductoSeleccion}"
+                BackgroundColor="Transparent"
+                EmptyView="No hay datos">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35" />
+                                <RowDefinition Height="35" />
+                                <RowDefinition Height="35" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.RowSpan="3"
+                                   Source="{Binding urlImagen}"
+                                   Aspect="AspectFill"
+                                   HeightRequest="60"
+                                   WidthRequest="60" />
+                            <Label Grid.Column="1"
+                                   Text="{Binding nombre}"
+                                   FontAttributes="Bold"
+                                   LineBreakMode="TailTruncation" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding tipo}"
+                                   LineBreakMode="TailTruncation"
+                                   FontAttributes="Italic"
+                                   VerticalOptions="End" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="2"
+                                   Text="{Binding precio, StringFormat='Precio: {0:C}'}"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   VerticalOptions="Start"
+                                   TextColor="Green" />
+                            <Label Grid.Row="2"
+                                   Grid.Column="2"
+                                   Text="{Binding stock, StringFormat='Stock: {0} unidades'}"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   VerticalOptions="Start"
+                                   TextColor="Red" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        <Button Grid.Row="2" Text="Volver" Margin="8" Command="{Binding GoToCancelarCommand}" Style="{StaticResource ButtonOutline}" />
+        <ActivityIndicator Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" />
+    </Grid>
+</ContentPage>

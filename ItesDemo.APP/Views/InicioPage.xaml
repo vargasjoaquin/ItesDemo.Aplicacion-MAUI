@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ItesDemo.APP.Views.InicioPage"
+             xmlns:vmodel="clr-namespace:ItesDemo.APP.ViewModels"
+             x:DataType="vmodel:InicioViewModel"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vmodel:InicioViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout Margin="20">
+        <Button 
+            Text="Productos"   
+            Command="{Binding GoToListaProductoComando}"
+            ImageSource="order_list_24.png"            
+            HeightRequest="50"
+            VerticalOptions="Start"
+            CornerRadius="5"                     
+            FontAttributes="Bold"
+            BackgroundColor="AliceBlue" 
+            BorderColor="#1976d2"
+            TextColor="#000"                
+            BorderWidth="1"            
+            ContentLayout="left, 3" 
+            Margin="0,0,0,20"
+        />
+        <Button Text="Acerca del Programador" 
+            Command="{Binding GoToAcercaComando}"               
+            ImageSource="info_24.png"
+            HeightRequest="50"
+            VerticalOptions="Start"     
+            CornerRadius="5"                     
+            FontAttributes="Bold"
+            BackgroundColor="AliceBlue" 
+            BorderColor="#1976d2"
+            TextColor="#000"                
+            BorderWidth="1"
+            ContentLayout="left, 3"
+            Margin="0,0,0,20"
+        />
+        <Button Text="Cerrar Sesión" 
+            Command="{Binding GoToExitCommand}"               
+            ImageSource="logout_24.png"
+            HeightRequest="50"
+            VerticalOptions="Start"     
+            CornerRadius="5"                     
+            FontAttributes="Bold"
+            BackgroundColor="AliceBlue" 
+            BorderColor="#1976d2"
+            TextColor="#000"                
+            BorderWidth="1"
+            ContentLayout="left, 3"     
+        />
+    </StackLayout>
+</ContentPage>

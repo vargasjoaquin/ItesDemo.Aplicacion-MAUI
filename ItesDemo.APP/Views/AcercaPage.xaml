@@ -1,0 +1,89 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ItesDemo.APP.Views.AcercaPage"
+             Title="Información sobre el programador">
+
+    <VerticalStackLayout>
+        <Image Source="foto1.png" 
+               HeightRequest="200"
+               Aspect="AspectFit"
+               Margin="20,30,0,20">
+        </Image>
+
+        <Label 
+            Text="Nombre completo: "
+            VerticalOptions="Start" 
+              HorizontalOptions="Center"
+             TextColor="Black"
+            FontAttributes="Bold">
+            
+        </Label>
+
+        <Label 
+           Text="Vargas, Joaquín León"
+            VerticalOptions="Start" 
+            HorizontalOptions="Center"
+            TextColor="Black"
+            Margin="0,0,0,40">
+        </Label>
+
+        <Label 
+            Text="Profesión: "
+            VerticalOptions="Start" 
+            HorizontalOptions="Center"
+            TextColor="Black"
+            FontAttributes="Bold">
+        </Label>
+
+        <Label 
+           Text="Desarrollador FullStack Jr"
+           VerticalOptions="Start" 
+           HorizontalOptions="Center"
+           TextColor="Black"
+           Margin="0,0,0,45">
+        </Label>
+
+        
+
+        <Label 
+           Text="Contacto movil:"
+           VerticalOptions="Start" 
+           HorizontalOptions="Center"
+           TextColor="Black"
+           FontAttributes="Bold">
+        </Label>
+
+        <Label 
+           Text="+54 2954-697169"
+           VerticalOptions="Start" 
+           HorizontalOptions="Center"
+           TextColor="Black"
+           Margin="0,10,0,40">
+        </Label>
+
+        <Label 
+          Text="Correo electronico:"
+          VerticalOptions="Start" 
+          HorizontalOptions="Center"
+          TextColor="Black"
+          FontAttributes="Bold">
+        </Label>
+
+        <Label 
+         Text="vargasjoaquin9978@gmail.com"
+         VerticalOptions="Start" 
+         HorizontalOptions="Center"
+         TextColor="Black"
+         Margin="0,10,0,40">
+        </Label>
+
+
+        <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+
+            <Button Text="LinkedIn" Clicked="AbrirLinkedln" BackgroundColor="#0077B5" TextColor="White" Margin="5" Padding="10,5"/>
+            <Button Text="GitHub" Clicked="AbrirGitHub" BackgroundColor="#333" TextColor="White" Margin="5" Padding="10,5"/>
+
+        </StackLayout>
+        <Button Grid.Row="2" Text="Volver" Margin="8" Command="{Binding GoToCancelarCommand}" Style="{StaticResource ButtonOutline}" />
+    </VerticalStackLayout>
+</ContentPage>
