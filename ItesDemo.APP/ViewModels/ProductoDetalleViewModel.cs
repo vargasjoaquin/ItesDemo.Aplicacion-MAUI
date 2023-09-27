@@ -12,13 +12,6 @@ namespace ItesDemo.APP.ViewModels
         {
             get { return productoModel; }
             set { SetProperty(ref productoModel, value); }
-        }
-
-        private async Task GoToBack()
-        {
-            await Application.Current.MainPage.Navigation.PopAsync();
-            // await Application.Current.MainPage.Navigation.PushAsync(new ProductoListaPage());
-
-        }
+        }        
     }
-    }
+}

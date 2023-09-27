@@ -14,7 +14,7 @@ namespace ItesDemo.APP.ViewModels
         private ObservableCollection<ProductoModel> originalProductos = new ObservableCollection<ProductoModel>();
 
         private string searchText = "";//Variable para buscar los producto mediante su nombre/texto.
-        private string selectedTipo = "";// "      "      "    "     "       "       "    tipo de producto especifico.
+        private string selectedTipo = "--Seleccione--";// "      "      "    "     "       "       "    tipo de producto especifico.
 
         public ProductoListaViewModel()
         {
@@ -74,22 +74,21 @@ namespace ItesDemo.APP.ViewModels
 
         public string SelectedTipo //Misma metodologia del metodo SearchText pero en este caso es para filtra el tipo de producto.
         {
-            get { return selectedTipo; }
+            get { return selectedTipo; }//Devuelve el valor actual de la propiedad SelectedTipo.
             set
             {
-                if (selectedTipo != value)
+                if (SetProperty(ref selectedTipo, value))//Establecemos el valor de SelectedTipo y verificamos si ha cambiado.
                 {
-                    selectedTipo = value;
-                    OnPropertyChanged(nameof(SelectedTipo));
-                    FilterProducts();
+                    FilterProducts();//Llamos al método FilterProducts para aplicar el filtro según el tipo de producto seleccionado.
                 }
             }
         }
 
-
         public ICommand GoToCancelarCommand => new Command(() => GoToCancelar());
 
         public ICommand RefreshCommand { get; set; }
+
+        #region METOODOS
 
         private async Task ConsultarApi()
         {
@@ -126,9 +125,7 @@ namespace ItesDemo.APP.ViewModels
 
         private void FilterProducts()
         {
-            
             var filteredProducts = originalProductos.ToList();//Copiamos la lista original de productos en una nueva lista llamada 'filteredProducts'
-
 
             if (!string.IsNullOrWhiteSpace(SearchText))//Verificamos si se ha ingresado texto de búsqueda de productos
             {
@@ -139,7 +136,7 @@ namespace ItesDemo.APP.ViewModels
             }
 
             //Misma metodologia que la anterior pero con el tipo de producto
-            if (!string.IsNullOrWhiteSpace(SelectedTipo))
+            if (SelectedTipo != "--Seleccione--") // Solo filtra si no se selecciona "--Seleccione--"
             {
                 filteredProducts = filteredProducts
                     .Where(p => p.tipo.Equals(SelectedTipo, StringComparison.OrdinalIgnoreCase))
@@ -147,5 +144,6 @@ namespace ItesDemo.APP.ViewModels
             }
             Productos = new ObservableCollection<ProductoModel>(filteredProducts);// Tuki, actualizamos la colección de productos con los resultados filtrados
         }
+        #endregion
     }
 }

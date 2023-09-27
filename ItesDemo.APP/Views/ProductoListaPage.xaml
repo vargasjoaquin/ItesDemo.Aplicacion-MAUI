@@ -14,11 +14,10 @@
 
         <StackLayout Grid.Row="0" Orientation="Horizontal" Spacing="10">
             <Entry Placeholder="Buscar por nombre" Text="{Binding SearchText}" HorizontalOptions="FillAndExpand" /> <!--ACA ESTA EL BUSCADOR DE PRODUCTOSsss-->
-            <Picker Title="Filtrar por Tipo" 
-        SelectedItem="{Binding SelectedTipo, Mode=TwoWay}">
+            <Picker Title="Filtrar por Tipo" SelectedItem="{Binding SelectedTipo, Mode=TwoWay}">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
-                        <x:String></x:String>
+                        <x:String>--Seleccione--</x:String>
                         <x:String>Gaseosa</x:String>
                         <x:String>Snack</x:String>
                     </x:Array>
