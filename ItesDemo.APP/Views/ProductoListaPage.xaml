@@ -15,7 +15,7 @@
         <StackLayout Grid.Row="0" Orientation="Horizontal" Spacing="10">
             <Entry Placeholder="Buscar por nombre" Text="{Binding SearchText}" HorizontalOptions="FillAndExpand" /> <!--ACA ESTA EL BUSCADOR DE PRODUCTOSsss-->
             <Picker Title="Filtrar por Tipo" 
-                    SelectedItem="{Binding SelectedTipo, Mode=TwoWay}"> <!--ACA ESTA EL FILTRADO DE PRODUCTOS-->
+        SelectedItem="{Binding SelectedTipo, Mode=TwoWay}">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String></x:String>
@@ -24,6 +24,7 @@
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
+
         </StackLayout>
 
         <RefreshView Grid.Row="1" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">

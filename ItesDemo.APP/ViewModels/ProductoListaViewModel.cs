@@ -86,6 +86,7 @@ namespace ItesDemo.APP.ViewModels
             }
         }
 
+
         public ICommand GoToCancelarCommand => new Command(() => GoToCancelar());
 
         public ICommand RefreshCommand { get; set; }

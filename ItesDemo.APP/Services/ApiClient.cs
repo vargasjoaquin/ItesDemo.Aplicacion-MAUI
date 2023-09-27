@@ -9,7 +9,7 @@ namespace ItesDemo.APP.Services;
 public class ApiClient
 {
     static HttpClient httpClient;
-    private Uri URL = new Uri("http://172.23.0.92:5003/api"); 
+    private Uri URL = new Uri("http://192.168.1.101:5003/api"); //192.168.1.101->House xd
 
 
     public ApiClient()
@@ -89,7 +89,7 @@ public class ApiClient
     {
         try
         {
-            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer"+Configuration.AppConfiguration.Token);
+            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + Configuration.AppConfiguration.Token);
             var json = await httpClient.GetStringAsync($"{URL}/producto");
 
             var result = JsonConvert.DeserializeObject<IEnumerable<ProductoModel>>(json);

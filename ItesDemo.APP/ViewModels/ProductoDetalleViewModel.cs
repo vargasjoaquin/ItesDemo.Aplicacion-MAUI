@@ -1,10 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using ItesDemo.APP.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ItesDemo.APP.ViewModels
 {
@@ -17,6 +12,13 @@ namespace ItesDemo.APP.ViewModels
         {
             get { return productoModel; }
             set { SetProperty(ref productoModel, value); }
+        }
+
+        private async Task GoToBack()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
+            // await Application.Current.MainPage.Navigation.PushAsync(new ProductoListaPage());
+
         }
     }
     }
