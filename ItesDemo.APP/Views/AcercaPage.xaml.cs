@@ -7,7 +7,7 @@ public partial class AcercaPage : ContentPage
 		InitializeComponent();
 	}
 
-    
+    #region METODOS
     private async void AbrirLinkedln(object sender, EventArgs e)
     {
         await Launcher.OpenAsync(new Uri("https://www.linkedin.com/in/joaqu%C3%ADn-vargas-140019236/"));
@@ -17,9 +17,6 @@ public partial class AcercaPage : ContentPage
     {
         await Launcher.OpenAsync(new Uri("https://github.com/vargasjoaquin"));
     }
-
-    
-
-
+    #endregion
 }
 

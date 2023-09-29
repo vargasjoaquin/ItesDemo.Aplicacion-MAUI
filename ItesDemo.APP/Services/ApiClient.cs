@@ -9,7 +9,7 @@ namespace ItesDemo.APP.Services;
 public class ApiClient
 {
     static HttpClient httpClient;
-    private Uri URL = new Uri("http://192.168.1.101:5003/api"); //192.168.1.101->House xd
+    private Uri URL = new Uri("http://192.168.5.215:5003/api"); //192.168.1.101->House xd
 
 
     public ApiClient()

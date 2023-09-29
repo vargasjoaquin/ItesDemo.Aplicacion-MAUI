@@ -8,14 +8,18 @@ namespace ItesDemo.APP.ViewModels
 {
     public class ProductoListaViewModel : BaseViewModel
     {
+        #region VARIABLES
         private bool isRefreshing;
-        private ProductoModel productoSeleccion;
+        private ProductoModel SeleccionProducto;
         private ObservableCollection<ProductoModel> productos = new ObservableCollection<ProductoModel>();
-        private ObservableCollection<ProductoModel> originalProductos = new ObservableCollection<ProductoModel>();
+        private ObservableCollection<ProductoModel> listaProductos = new ObservableCollection<ProductoModel>();
 
         private string searchText = "";//Variable para buscar los producto mediante su nombre/texto.
         private string selectedTipo = "--Seleccione--";// "      "      "    "     "       "       "    tipo de producto especifico.
 
+        #endregion
+
+        #region CONSTRUCTOR
         public ProductoListaViewModel()
         {
             Title = "Lista Productos";
@@ -32,21 +36,23 @@ namespace ItesDemo.APP.ViewModels
                 await ConsultarApi();
             });
         }
+        #endregion
 
+        #region PROPIEDADES
         public ObservableCollection<ProductoModel> Productos
         {
-            get { return productos; }
-            set { SetProperty(ref productos, value); }
+            get { return productos; }//Devuelve la colección actual de productos.
+            set { SetProperty(ref productos, value);}//Actualizamos la colección de productos.
         }
 
-        public ProductoModel ProductoSeleccion
+        public ProductoModel SeleccionDeProducto
         {
-            get { return productoSeleccion; }
+            get { return SeleccionProducto; }//Devuelve el producto seleccionado.
             set
             {
-                if (SetProperty(ref productoSeleccion, value))
+                if (SetProperty(ref SeleccionProducto, value))//Actualizamos la colección de productos.
                 {
-                    GoToDetail(); 
+                    GoToDetail();//Llamamos al metodo de detalles.
                 }
             }
         }
@@ -84,9 +90,13 @@ namespace ItesDemo.APP.ViewModels
             }
         }
 
+        #endregion
+
+        #region COMANDOS
         public ICommand GoToCancelarCommand => new Command(() => GoToCancelar());
 
         public ICommand RefreshCommand { get; set; }
+        #endregion
 
         #region METOODOS
 
@@ -100,7 +110,7 @@ namespace ItesDemo.APP.ViewModels
 
             var lista = await apiClient.ObtenerProductos();
 
-            originalProductos = new ObservableCollection<ProductoModel>(lista);
+            listaProductos = new ObservableCollection<ProductoModel>(lista);
 
             FilterProducts();
 
@@ -114,18 +124,18 @@ namespace ItesDemo.APP.ViewModels
 
         private async void GoToDetail()
         {
-            if (ProductoSeleccion != null)
+            if (SeleccionDeProducto != null)
             {
                 var ProductoDetalleViewModel = new ProductoDetalleViewModel();// Creamos una nueva instancia del ProductoDetalleViewModel para la página de detalles del producto.
-                ProductoDetalleViewModel.ProductoModel = ProductoSeleccion; // Asignamos el producto seleccionado al ProductoDetalleViewModel.
+                ProductoDetalleViewModel.ProductoModel = SeleccionDeProducto; // Asignamos el producto seleccionado al ProductoDetalleViewModel.
                 var ProductoDetallePage = new ProductoDetallePage { BindingContext = ProductoDetalleViewModel }; // Creamos una nueva instancia de la página de detalles del producto.
-                await Application.Current.MainPage.Navigation.PushAsync(ProductoDetallePage); //Nos dijimos a la página de detalles de producto de forma asíncrona.
+                await Application.Current.MainPage.Navigation.PushAsync(ProductoDetallePage);//Nos dijimos a la página de detalles de producto de forma asíncrona.
             }
         }
 
         private void FilterProducts()
         {
-            var filteredProducts = originalProductos.ToList();//Copiamos la lista original de productos en una nueva lista llamada 'filteredProducts'
+            var filteredProducts = listaProductos.ToList();//Copiamos la lista original de productos en una nueva lista llamada 'filteredProducts'
 
             if (!string.IsNullOrWhiteSpace(SearchText))//Verificamos si se ha ingresado texto de búsqueda de productos
             {
@@ -135,8 +145,7 @@ namespace ItesDemo.APP.ViewModels
                     .ToList();
             }
 
-            //Misma metodologia que la anterior pero con el tipo de producto
-            if (SelectedTipo != "--Seleccione--") // Solo filtra si no se selecciona "--Seleccione--"
+            if (SelectedTipo != "--Seleccione--") //Filtramos si no se selecciona "--Seleccione--"
             {
                 filteredProducts = filteredProducts
                     .Where(p => p.tipo.Equals(SelectedTipo, StringComparison.OrdinalIgnoreCase))
